@@ -1,0 +1,19 @@
+---
+
+- name: Create httpd.d configuration directory
+  file: path=/etc/httpd.d state=directory owner=root group=wheel mode=0755
+
+- name: Create httpd.conf
+  template: src=httpd.conf.j2 dest=/etc/httpd.conf owner=root group=wheel mode=644
+  with_items: "{{ httpd_sites }}"
+  notify:
+    - restart httpd 
+
+- name: Create site config files
+  template: src=site.j2 dest=/etc/httpd.d/{{ item['server']['server_name'] }}.conf owner=roto group=wheel mode=644
+  with_items: "{{ httpd_sites }}"
+  notify:
+    - restart httpd 
+
+- name: Enable httpd
+  service: name=httpd state=started enabled=yes

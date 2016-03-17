@@ -1,0 +1,13 @@
+---
+galaxy_info:
+  author: "Aaron Bieber"
+  company: ""
+  license: BSD
+  min_ansible_version: 1.4
+  platforms:
+    - name: OpenBSD
+      versions:
+        - 5.8
+  categories:
+    - web
+dependencies: []

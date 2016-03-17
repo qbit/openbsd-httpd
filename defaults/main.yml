@@ -1,0 +1,13 @@
+---
+
+httpd_ext_addr: *
+httpd_chroot: "/var/www"
+httpd_default_type: "application/octet-stream"
+httpd_logdir: "/logs"
+httpd_prefork: 3
+
+httpd_servers:
+  - server:
+    server_name: "default"
+    listen: "$ext_addr"
+    port: 80

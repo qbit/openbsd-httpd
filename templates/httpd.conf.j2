@@ -1,0 +1,8 @@
+#{{ ansible_managed }}
+
+ext_addr="{{ httpd_ext_addr }}"
+
+chroot "{{ httpd_chroot }}"
+default type "{{ httpd_default_type }}"
+logdir "{{ httpd_logdir }}"
+prefor "{{ httpd_prefork }}"
