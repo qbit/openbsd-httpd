@@ -5,4 +5,24 @@ ext_addr="{{ httpd_ext_addr }}"
 chroot "{{ httpd_chroot }}"
 default type "{{ httpd_default_type }}"
 logdir "{{ httpd_logdir }}"
-prefor "{{ httpd_prefork }}"
+prefork "{{ httpd_prefork }}"
+
+{% for server in httpd_servers %}
+server "{% server.server_name %}" {
+	listen on $ext_addr port {% server.port %}
+	{% if server.no_logging is defined %}
+	no log
+	{% endif %}
+	
+	{% for location in server.locations %}
+	location "{% location %}" {
+		{% for opt in server.locations[location] %}
+		{% server.locations[location][opt] %}
+		{% endfor %}
+	}
+	{% endfor %}
+
+	root "{% server.root %}
+}
+
+{% endfor %}

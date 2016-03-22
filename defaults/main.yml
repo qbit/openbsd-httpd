@@ -10,4 +10,12 @@ httpd_servers:
   - server:
     server_name: "default"
     listen: "$ext_addr"
+    #no_logging: true
     port: 80
+    locations:
+      - "/pub/*":
+        - "directory auto index"
+        - "log style combined"
+      - "*.php"
+        - "fastcgi socket "/vun/php-fpm.sock"
+      
